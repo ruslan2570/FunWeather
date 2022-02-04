@@ -4,9 +4,9 @@
 
     <application
 
-        android:icon="@mipmap/fweather_logo"
+        android:icon="@mipmap/fweather_logo_round"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/fweather_logo"
+        android:roundIcon="@mipmap/fweather_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Demin_FunWeather">
         <activity
