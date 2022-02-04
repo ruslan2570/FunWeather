@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">FunWeather</string>
+    <string name="app_name" translatable="false">FunWeather</string>
+    <string name="btn_update">Update</string>
+    <string name="temp">Temp:</string>
+    <string name="temp_feels">Feels like:</string>
+    <string name="humidity">humidity:</string>
+    <string name="wind_speed">wind speed:</string>
+    <string name="wind_direction">wind direction</string>
+    <string name="city_name">city: </string>
+    <string name="description">Weather condition</string>
 </resources>

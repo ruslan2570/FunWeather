@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FunWeather</string>
+    <string name="btn_update">Обновить</string>
+    <string name="temp">Температура:</string>
+    <string name="temp_feels">Ощущается как:</string>
+    <string name="humidity">Влажность:</string>
+    <string name="wind_speed">Скорость ветра:</string>
+    <string name="wind_direction">Направление:</string>
+    <string name="city_name">Город:</string>
+    <string name="description">Текущая погода</string>
+</resources>
