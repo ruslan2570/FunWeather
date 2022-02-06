@@ -9,4 +9,5 @@
     <string name="wind_direction">Направление:</string>
     <string name="city_name">Город:</string>
     <string name="description">Текущая погода</string>
+    <string name="powered_by">Работает от OpenWetherMap®</string>
 </resources>

@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:text="@string/city_name"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_temp"
@@ -34,7 +34,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="5dp"
         android:text="@string/temp"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_temp_feels"
@@ -43,16 +43,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="5dp"
         android:text="@string/temp_feels"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_wind_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/wind_speed"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_wind_direction"
@@ -61,33 +61,48 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="5dp"
         android:text="@string/wind_direction"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/humidity"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_fun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginStart="16dp"
-        android:textStyle="italic"
-        android:textSize="20sp" />
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:text=""
+        android:textStyle="italic" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="165dp"
+        android:textSize="12sp"
+        android:text="@string/powered_by" />
 
     <Button
         android:id="@+id/btn_update"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
         android:layout_gravity="bottom"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:text="@string/btn_update"
         tools:ignore="TouchTargetSizeCheck" />
+
+
 
 </LinearLayout>

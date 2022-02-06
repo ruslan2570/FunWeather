@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bad_weather">
+        <item>А может, не пойдём на пары?</item>
+        <item>Грустно и пусто</item>
+        <item>Мир - тлен</item>
+        <item>Я так хочу вернуться в май-май</item>
+    </string-array>
+
+    <string-array name="good_weather">
+        <item>Жизнь прекрасна!</item>
+        <item>Едем на шашлычки!</item>
+    </string-array>
+</resources>

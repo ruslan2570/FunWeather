@@ -3,9 +3,10 @@
     <string name="btn_update">Update</string>
     <string name="temp">Temp:</string>
     <string name="temp_feels">Feels like:</string>
-    <string name="humidity">humidity:</string>
-    <string name="wind_speed">wind speed:</string>
-    <string name="wind_direction">wind direction</string>
-    <string name="city_name">city: </string>
+    <string name="humidity">Humidity:</string>
+    <string name="wind_speed">Wind speed:</string>
+    <string name="wind_direction">Wind direction</string>
+    <string name="city_name">City: </string>
     <string name="description">Weather condition</string>
+    <string name="powered_by">Powered by OpenWeatherMap®</string>>
 </resources>
