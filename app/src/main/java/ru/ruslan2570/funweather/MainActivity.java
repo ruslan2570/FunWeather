@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         tvFun = findViewById(R.id.text_fun);
         btnUpdate = findViewById(R.id.btn_update);
 
-        ApiIO apiio = new ApiIO(getFilesDir());
-
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 1);

@@ -15,7 +15,7 @@ public class RemoteFetch {
 	final static String LANG = "RU";
 	final static String UNITS = "metric";
 	final static String URL = "http://api.openweathermap.org/data/2.5/weather?";
-	private String APIKey = "4f337481565d15c81f846b9b19de35bd";
+	private String APIKey = "YOUR_API_KEY";
 	private double latitude;
 	private double longitude;
 
