@@ -16,6 +16,9 @@ import android.os.Process;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,14 +56,15 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000 * 5, 100, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000 * 5, 300, locationListener);
         final Integer[] i = {0};
         btnUpdate.setOnClickListener(view -> {
             i[0] += 1;
             Log.i("Click!", String.format("%s", i[0]));
+//            Toast toast = Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT);
+//            toast.show();
             try {
                 showLocation(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
             }
@@ -68,10 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
-                remoteFetch.call();
+                JSONObject json = remoteFetch.call();
+                json.getJSONObject("weather").getString("description");
+                Toast toast = Toast.makeText(MainActivity.this, json.getJSONObject("weather").getString("description"), Toast.LENGTH_SHORT);
+                toast.show();
             }
-            catch (Exception e){
-                e.printStackTrace();
+            catch (Exception e){ ;
+                Toast toast = Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT);
+                toast.show();
+
             }
         });
     }
@@ -85,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showLocation(Location location) {
         if (location == null) {
-            onDestroy();
-            return;
+           // throw new Exception("");
         }
         Log.i("Lat", Double.toString(location.getLatitude()));
         Log.i("Long", Double.toString(location.getLongitude()));
