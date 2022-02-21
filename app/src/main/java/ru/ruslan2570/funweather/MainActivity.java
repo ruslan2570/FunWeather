@@ -119,10 +119,8 @@ public class MainActivity extends AppCompatActivity {
 		final static String UNITS = "metric";
 		final static String URL = "http://api.openweathermap.org/data/2.5/weather?";
 		private final String APIKey = "YOUR_API_KEY";
-		private double latitude;
-		private double longitude;
-		protected JSONObject json = null;
-		int a;
+		private final double latitude;
+		private final double longitude;
 
 		RemoteFetch(double latitude, double longitude) {
 			this.latitude = latitude;
