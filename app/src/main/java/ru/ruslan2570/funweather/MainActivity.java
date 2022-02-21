@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
 				&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+			ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+			//startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 		}
 
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000 * 5, 300, locationListener);
@@ -74,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
 		btnUpdate.setOnClickListener(view -> {
 			i[0] += 1;
 			Log.i("Click!", String.format("%s", i[0]));
-//            Toast toast = Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT);
-//            toast.show();
 			try {
 				double lat = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude();
 				double lon = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude();
@@ -83,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
 				Log.i("Long", Double.toString(lon));
 				RemoteFetch remoteFetch = new RemoteFetch(lat, lon);
 				remoteFetch.execute();
-//				JSONObject json = remoteFetch.getJson();
-//				json.getJSONObject("weather").getString("description");
-//				Toast toast = Toast.makeText(MainActivity.this, json.getJSONObject("weather").getString("description"), Toast.LENGTH_SHORT);
-//				toast.show();
 
 			} catch (Exception e) {
 				Toast toast = Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT);
@@ -99,26 +94,24 @@ public class MainActivity extends AppCompatActivity {
 	public LocationListener locationListener = new LocationListener() {
 		@Override
 		public void onLocationChanged(@NonNull Location location) {
-//            showLocation(location);
+		   showLocation(location);
 		}
 	};
 
-//    private void showLocation(Location location) {
-//        if (location == null) {
-//           // throw new Exception("");
-//        }
-//        Log.i("Lat", Double.toString(location.getLatitude()));
-//        Log.i("Long", Double.toString(location.getLongitude()));
-//        remoteFetch.setLatitude(location.getLatitude());
-//        remoteFetch.setLongitude(location.getLongitude());
-//    }
+    private void showLocation(Location location) {
+        if (location == null) {
+           // throw new Exception("");
+        }
+        Log.i("Lat", Double.toString(location.getLatitude()));
+        Log.i("Long", Double.toString(location.getLongitude()));
+    }
 
 
 	class RemoteFetch extends AsyncTask<Void, Void, JSONObject> {
 		final static String LANG = "RU";
 		final static String UNITS = "metric";
 		final static String URL = "http://api.openweathermap.org/data/2.5/weather?";
-		private final String APIKey = "YOUR_API_KEY";
+		private final String APIKey = "API_KEY";
 		private final double latitude;
 		private final double longitude;
 
@@ -127,20 +120,12 @@ public class MainActivity extends AppCompatActivity {
 			this.longitude = longitude;
 		}
 
-//	public void setLatitude(double latitude) {
-//		this.latitude = latitude;
-//	}
-//
-//	public void setLongitude(double longitude) {
-//		this.longitude = longitude;
-//	}
-
 		@Override
 		protected JSONObject doInBackground(Void... voids) {
 			try {
-				String path = String.format("%slat=%s&lon=%sl&ang=%s&units=%s&appid=%s", URL, latitude, longitude, LANG, UNITS, APIKey);
-
-				path = "http://new-bokino.ru/test.json";
+				String path = String.format("%slat=%s&lon=%s&lang=%s&units=%s&appid=%s", URL, latitude, longitude, LANG, UNITS, APIKey);
+				Log.i("Path", path);
+				//path = "http://new-bokino.ru/test.json";
 				URL url = new URL(path);
 				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 				if (urlConnection.getResponseCode() != 200)
@@ -187,10 +172,6 @@ public class MainActivity extends AppCompatActivity {
 		private int windDirection;
 		private int humidity;
 		private JSONObject jsonObject = null;
-
-//	tvDescription.setText(json.getJSONArray("weather").getJSONObject(0).getString("description"));
-//				tvCityName.setText(getResources().getString(R.string.city_name) + " " + json.getString("name"));
-
 
 		public WeatherHandler(JSONObject json) throws JSONException {
 			description = json.getJSONArray("weather").getJSONObject(0).getString("description");
@@ -257,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		Log.i("onDestroy", "Bye!");
 		android.os.Process.killProcess(Process.myPid());
 		System.exit(0);
 	}
