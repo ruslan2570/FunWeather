@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="N">Northern</string>
+    <string name="NE">Northeast</string>
+    <string name="E">Eastern</string>
+    <string name="SE">Southeast</string>
+    <string name="S">South</string>
+    <string name="SW">Southwest</string>
+    <string name="W">West</string>
+    <string name="NW">Northwest</string>
+</resources>

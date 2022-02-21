@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 				tvWindSpeed.setText(weather.getWindSpeed());
 				tvWindDirection.setText(weather.getWindDirection());
 				tvHumidity.setText(weather.getHumidity());
-
+				tvFun.setText(weather.getFun());
 			} catch (JSONException e) {
 				Toast toast = Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT);
 				toast.show();
@@ -224,15 +225,36 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		public String getWindDirection() {
-			return getResources().getString(R.string.wind_direction) + " " + "i will do it later";
+			String result = "";
+			if(windDirection > 348 || windDirection < 12) result = getResources().getString(R.string.N);
+			if(windDirection > 12 && windDirection < 78) result = getResources().getString(R.string.NE);
+			if(windDirection > 78 && windDirection < 101) result = getResources().getString(R.string.E);
+			if(windDirection > 101 && windDirection < 168) result = getResources().getString(R.string.SE);
+			if(windDirection > 168 && windDirection < 214) result = getResources().getString(R.string.S);
+			if(windDirection > 214 && windDirection < 259) result = getResources().getString(R.string.SW);
+			if(windDirection > 259 && windDirection < 304) result = getResources().getString(R.string.W);
+			if(windDirection > 304 && windDirection < 348) result = getResources().getString(R.string.NW);
+			return  getResources().getString(R.string.wind_direction) + " " + result;
 		}
 
 		public String getHumidity() {
-			return getResources().getString(R.string.humidity) + " " + humidity;
+			return getResources().getString(R.string.humidity) + " " + humidity + "%";
+		}
+
+		public String getFun(){
+			String[] bad = getResources().getStringArray(R.array.bad_weather);
+			String[] good = getResources().getStringArray(R.array.good_weather);
+			if(temp < 18) {
+				int index = (new Random()).ints(0, bad.length).iterator().nextInt();
+				return bad[index];
+			}
+			else{
+				int index = (new Random()).ints(0, good.length).iterator().nextInt();
+				return good[index];
+			}
 		}
 
 	}
-
 
 	@Override
 	protected void onDestroy() {

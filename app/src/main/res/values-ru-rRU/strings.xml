@@ -10,4 +10,12 @@
     <string name="city_name">Город:</string>
     <string name="description">Текущая погода</string>
     <string name="powered_by">Работает от OpenWeatherMap®</string>
+    <string name="N">Северный</string>
+    <string name="NE">Северо-восточный</string>
+    <string name="E">Восточный</string>
+    <string name="SE">Юго-восточный</string>
+    <string name="S">Южный</string>
+    <string name="SW">Юго-западный</string>
+    <string name="W">Западный</string>
+    <string name="NW">Северо-западный</string>
 </resources>
