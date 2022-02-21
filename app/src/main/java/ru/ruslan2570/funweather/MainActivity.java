@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.common.io.ByteStreams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+	TextView tvDescription;
 	TextView tvCityName;
 	TextView tvTemp;
 	TextView tvTempFeels;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		tvDescription = findViewById(R.id.text_description);
 		tvCityName = findViewById(R.id.text_city_name);
 		tvTemp = findViewById(R.id.text_temp);
 		tvTempFeels = findViewById(R.id.text_temp_feels);
@@ -110,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
 	class RemoteFetch extends AsyncTask<Void, Void, JSONObject> {
 		final static String LANG = "RU";
 		final static String UNITS = "metric";
@@ -140,11 +142,10 @@ public class MainActivity extends AppCompatActivity {
 				String path = String.format("%slat=%s&lon=%sl&ang=%s&units=%s&appid=%s", URL, latitude, longitude, LANG, UNITS, APIKey);
 
 				path = "http://new-bokino.ru/test.json";
-				java.net.URL url = new URL(path);
+				URL url = new URL(path);
 				HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 				if (urlConnection.getResponseCode() != 200)
 					throw new IOException("Response code isn't 200");
-
 				else {
 					InputStream inputStream = urlConnection.getInputStream();
 					byte[] buff = ByteStreams.toByteArray(inputStream);
@@ -160,9 +161,78 @@ public class MainActivity extends AppCompatActivity {
 
 		@Override
 		protected void onPostExecute(JSONObject json) {
+			try {
+				WeatherHandler weather = new WeatherHandler(json);
+				tvDescription.setText(weather.getDescription());
+				tvCityName.setText(weather.getCity());
+				tvTemp.setText(weather.getTemp());
+				tvTempFeels.setText(weather.getFeelsLike());
+				tvWindSpeed.setText(weather.getWindSpeed());
+				tvWindDirection.setText(weather.getWindDirection());
+				tvHumidity.setText(weather.getHumidity());
+
+			} catch (JSONException e) {
+				Toast toast = Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT);
+				toast.show();
+			}
 
 		}
 	}
+
+	public class WeatherHandler {
+		private String description;
+		private String city;
+		private double temp;
+		private double feelsLike;
+		private double windSpeed;
+		private int windDirection;
+		private int humidity;
+		private JSONObject jsonObject = null;
+
+//	tvDescription.setText(json.getJSONArray("weather").getJSONObject(0).getString("description"));
+//				tvCityName.setText(getResources().getString(R.string.city_name) + " " + json.getString("name"));
+
+
+		public WeatherHandler(JSONObject json) throws JSONException {
+			description = json.getJSONArray("weather").getJSONObject(0).getString("description");
+			city = json.getString("name");
+			temp = json.getJSONObject("main").getDouble("temp");
+			feelsLike = json.getJSONObject("main").getDouble("feels_like");
+			windSpeed = json.getJSONObject("wind").getDouble("speed");
+			windDirection = json.getJSONObject("wind").getInt("deg");
+			humidity = json.getJSONObject("main").getInt("humidity");
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public String getCity() {
+			return getResources().getString(R.string.city_name) + " " + city;
+		}
+
+		public String getTemp() {
+			return getResources().getString(R.string.temp) + " " + temp;
+		}
+
+		public String  getFeelsLike() {
+			return getResources().getString(R.string.temp_feels) + " " + feelsLike;
+		}
+
+		public String getWindSpeed() {
+			return getResources().getString(R.string.wind_speed) + " " + windSpeed;
+		}
+
+		public String getWindDirection() {
+			return getResources().getString(R.string.wind_direction) + " " + "i will do it later";
+		}
+
+		public String getHumidity() {
+			return getResources().getString(R.string.humidity) + " " + humidity;
+		}
+
+	}
+
 
 	@Override
 	protected void onDestroy() {
