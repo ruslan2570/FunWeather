@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 		final static String LANG = "RU";
 		final static String UNITS = "metric";
 		final static String URL = "http://api.openweathermap.org/data/2.5/weather?";
-		private final String APIKey = "API_KEY";
+		private final String APIKey = "6b68e400d54bdff4a557ae07f5f5339b";
 		private final double latitude;
 		private final double longitude;
 
@@ -143,13 +143,13 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public class WeatherHandler {
-		private final String description;
-		private final String city;
-		private final double temp;
-		private final double feelsLike;
-		private final double windSpeed;
-		private final int windDirection;
-		private final int humidity;
+		private String description;
+		private String city;
+		private double temp;
+		private double feelsLike;
+		private double windSpeed;
+		private int windDirection;
+		private int humidity;
 
 		public WeatherHandler(JSONObject json) throws JSONException {
 			description = json.getJSONArray("weather").getJSONObject(0).getString("description");
@@ -166,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		public String getCity() {
+			if(city.equalsIgnoreCase("галенчино")) {
+				city = "Рязань";
+			}
 			return getResources().getString(R.string.city_name) + " " + city;
 		}
 
