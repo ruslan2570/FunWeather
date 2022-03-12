@@ -10,5 +10,6 @@
     <string-array name="good_weather">
         <item>Жизнь прекрасна!</item>
         <item>Едем на шашлычки!</item>
+        <item>Я пришел к тебе с приветом</item>
     </string-array>
 </resources>
